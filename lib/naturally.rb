@@ -7,7 +7,7 @@ module Naturally
   # @return [Array<String>] the numbers sorted naturally.
   def self.sort(an_array)
     return an_array.sort_by { |x| normalize(x) }
-  end  
+  end
 
   # Convert the given number into an object that can be sorted
   # naturally. This object is an array of {NumberElement} instances.
@@ -16,7 +16,7 @@ module Naturally
   # @return [Array<NumberElement>] an array of NumberElements which is
   #         able to be sorted naturally via a normal 'sort'.
   def self.normalize(number)
-    number.to_s.scan(%r/[0-9a-zA-Z]+/o).map { |i| NumberElement.new(i) }
+    number.to_s.scan(%r/\p{Word}+/o).map { |i| NumberElement.new(i) }
   end
 
   private
@@ -34,42 +34,43 @@ module Naturally
 
     def <=>(other)
       if pure_integer? && other.pure_integer?
-        return @val.to_i <=> other.val.to_i
+        @val.to_i <=> other.val.to_i
       elsif numbers_with_letters? || other.numbers_with_letters?
-        return simple_normalize(@val) <=> simple_normalize(other.val)
+        simple_normalize(@val) <=> simple_normalize(other.val)
       elsif letters_with_numbers? || other.letters_with_numbers?
-        return reverse_simple_normalize(@val) <=> reverse_simple_normalize(other.val)
+        reverse_simple_normalize(@val) <=> reverse_simple_normalize(other.val)
       else
-        return @val <=> other.val
+        @val <=> other.val
       end
     end
-    
+
     def pure_integer?
       @val =~ /^\d+$/
     end
-    
+
     def numbers_with_letters?
-      val =~ /^\d+[a-zA-Z]+$/
+      val =~ /^\d+\p{Alpha}+$/
     end
 
     def letters_with_numbers?
-      val =~ /^[a-zA-Z]+\d+$/
+      val =~ /^\p{Alpha}+\d+$/
     end
-    
+
     def simple_normalize(n)
-      if n =~ /^(\d+)([a-zA-Z]+)$/
-        return [$1.to_i, $2]
-      else 
-        return [n.to_i]
+      if n =~ /^(\d+)(\p{Alpha}+)$/
+        [$1.to_i, $2]
+      else
+        [n.to_i]
       end
     end
 
     def reverse_simple_normalize(n)
-      if n =~ /^([a-zA-Z]+)(\d+)$/
-        return [$1, $2.to_i]
+      if n =~ /^(\p{Alpha}+)(\d+)$/
+        [$1, $2.to_i]
       else
-        return [n.to_s]
+        [n.to_s]
       end
     end
+
   end
 end
