@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    naturally (1.1.0)
+    naturally-utf8 (1.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -21,6 +21,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  naturally!
+  naturally-utf8!
   rake (~> 10.0)
   rspec (~> 2.0)
