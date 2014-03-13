@@ -5,5 +5,5 @@ group :test do
   gem 'rake', '~> 10.0'
 end
 
-# Specify your gem's dependencies in naturally.gemspec
+# Specify your gem's dependencies in naturally-unicode.gemspec
 gemspec

@@ -1,6 +1,6 @@
-require 'naturally/version'
+require 'naturally-unicode/version'
 
-module Naturally
+module NaturallyUnicode
   # Perform a natural sort.
   #
   # @param [Array<String>] an_array the list of numbers to sort.
