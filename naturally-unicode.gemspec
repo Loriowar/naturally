@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'naturally-unicode/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "naturally-unicode"
+  gem.name          = 'naturally-unicode'
   gem.version       = NaturallyUnicode::VERSION
   gem.authors       = ["Robb Shecter"]
   gem.email         = ["robb@weblaws.org"]

@@ -1,4 +1,4 @@
-require 'naturally_unicode'
+require 'naturally-unicode'
 
 describe NaturallyUnicode do
   describe '#sort' do
